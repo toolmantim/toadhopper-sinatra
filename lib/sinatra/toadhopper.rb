@@ -2,14 +2,17 @@ require 'sinatra/base'
 require 'toadhopper'
 
 module Sinatra
+  # The Toadhopper helper methods. Simply require this method from within your Sinatra app.
   module Toadhopper
     # Reports the current sinatra error to Hoptoad.
     def post_error_to_hoptoad!
-      unless api_key = options.respond_to?(:toadhopper) && options.toadhopper[:api_key]
-        STDERR.puts "WARNING: Ignoring post_error_to_hoptoad! - :api_key not set"
+      if options.respond_to?(:toadhopper)
+        options.toadhopper.each_pair {|k, v| ::Toadhopper.__send__("#{k}=", v)}
+      end
+      unless ::Toadhopper.api_key
+        STDERR.puts "WARNING: Ignoring hoptoad notification - :api_key not set"
         return
       end
-      ::Toadhopper.api_key = api_key
       ::Toadhopper.post!(
         env['sinatra.error'],
         {

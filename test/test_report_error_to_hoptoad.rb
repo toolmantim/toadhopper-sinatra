@@ -17,7 +17,7 @@ class TestReportErrorToHoptoad < Test::Unit::TestCase
     set :raise_errors, false
     set :sessions, true
 
-    set :toadhopper, :api_key => "apikey"
+    set :toadhopper, :api_key => "apikey", :filters => /afilter/
 
     get "/:id" do
       session["id"] = "sessionid"
@@ -43,6 +43,9 @@ class TestReportErrorToHoptoad < Test::Unit::TestCase
 
   def test_api_key_set
     assert_equal "apikey", Toadhopper.api_key
+  end
+  def test_filter_set
+    assert_equal [/afilter/], Toadhopper.filters
   end
 
   def test_reported_error
