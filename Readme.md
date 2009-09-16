@@ -1,12 +1,10 @@
-A Sinatra plugin for [Hoptoad](http://www.hoptoadapp.com/) error reporting that uses the toadhopper gem.
-
-You configure the Toadhopper gem as-per usual, this plugin simply adds a `report_error_to_hoptoad!` method.
+Post [Hoptoad](http://www.hoptoadapp.com/) notifications from Sinatra
 
 ## Example
 
     require 'sinatra/toadhopper'
     
-    set :toadhopper, :api_key => "YOURAPIKEY"
+    set :toadhopper, :api_key => "your hoptoad API key"
     
     get "/" do
       raise "Kaboom!"
