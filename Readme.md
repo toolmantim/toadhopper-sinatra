@@ -12,3 +12,7 @@ Post [Hoptoad](http://www.hoptoadapp.com/) notifications from Sinatra
       post_error_to_hoptoad!
       "Ouch, that hurt."
     end
+
+You can install it via rubygems:
+
+    gem install toadhopper-sinatra
