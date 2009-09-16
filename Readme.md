@@ -1,4 +1,22 @@
-Post [Hoptoad](http://www.hoptoadapp.com/) notifications from Sinatra
+[Hoptoad](http://www.hoptoadapp.com/) meets [Sinatra](http://www.sinatrarb.com/).
+
+        _____                                ,
+       /     \______                         |\        __
+      | o     |     \____                    | |      |--|             __
+      /\_____/           \___                |/       |  |            |~'
+     /                       \              /|_      () ()            |
+    |_______/                 \            //| \             |\      ()
+      \______   _       ___    \          | \|_ |            | \
+            /\_//      /   \    |          \_|_/            ()  |
+           // //______/    /___/             |                  |
+          /\/\/\      \   / \ \             @'                 ()
+                        \ \   \ \      
+                          \ \   \ \    
+                            \ \  \ \   
+                             \ \ /\/\  
+                             /\/\
+
+How?
 
     require 'sinatra/toadhopper'
     
@@ -13,6 +31,6 @@ Post [Hoptoad](http://www.hoptoadapp.com/) notifications from Sinatra
       "Ouch, that hurt."
     end
 
-You can install it via rubygems:
+Install it via rubygems:
 
     gem install toadhopper-sinatra
