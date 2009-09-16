@@ -3,7 +3,6 @@ require 'rubygems'
 require 'test/unit'
 require 'sinatra/base'
 require 'rack/test'
-require 'toadhopper/test/methods'
 
 $:.unshift File.dirname(__FILE__) + "/../lib"
 require 'sinatra/toadhopper'
@@ -67,6 +66,10 @@ class TestReportErrorToHoptoad < Test::Unit::TestCase
     assert_equal({"id" => "theid"}, @options[:request][:params])
     assert_equal nil, @options[:request][:rails_root]
     assert_equal({:key => 42, :data => {"id" => "sessionid"}}, @options[:session])
+  end
+  
+  def test_header_options
+    assert_equal "toadhopper-sinatra", @header_options['X-Hoptoad-Client-Name']
   end
   
 end

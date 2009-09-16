@@ -24,7 +24,8 @@ module Sinatra
             :key => 42, # Doesn't apply to Rack sessions
             :data => session
           }
-        }
+        },
+        {'X-Hoptoad-Client-Name'    => 'toadhopper-sinatra'}
       )
     end
   end
