@@ -10,5 +10,14 @@ begin
   gem "sr-mg", "<= 0.0.5"
   require "mg"
   MG.new("toadhopper-sinatra.gemspec")
-rescue LoadError
+rescue Gem::LoadError
+end
+
+begin
+  gem "yard"
+  require 'yard'
+  YARD::Rake::YardocTask.new do |t|
+    t.options = ['-r', 'Readme.md'] # optional
+  end
+rescue Gem::LoadError
 end
