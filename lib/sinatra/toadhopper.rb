@@ -2,9 +2,9 @@ require 'sinatra/base'
 require 'toadhopper'
 
 module Sinatra
-  # The Toadhopper helper methods. Simply require this method from within your Sinatra app.
+  # The Toadhopper helper methods
   module Toadhopper
-    # Reports the current sinatra error to Hoptoad.
+    # Reports the current sinatra error to Hoptoad
     def post_error_to_hoptoad!
       if options.respond_to?(:toadhopper)
         options.toadhopper.each_pair {|k, v| ::Toadhopper.__send__("#{k}=", v)}

@@ -12,6 +12,7 @@ Gem::Specification.new do |s|
   s.files             = %w(
                           Readme.md
                           Rakefile
+                          LICENSE
                           lib/sinatra/toadhopper.rb
                           test/test_report_error_to_hoptoad.rb
                         )
