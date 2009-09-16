@@ -10,7 +10,7 @@ Gem::Specification.new do |s|
   s.require_path      = "lib"
   s.rubyforge_project = "th-sinatra"
   s.files             = %w(
-                          Readme.md
+                          README.md
                           Rakefile
                           LICENSE
                           lib/sinatra/toadhopper.rb
