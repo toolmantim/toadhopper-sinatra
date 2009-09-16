@@ -6,13 +6,13 @@ You configure the Toadhopper gem as-per usual, this plugin simply adds a `report
 
     require 'sinatra/toadhopper'
     
-    Toadhopper.api_key = "YOURAPIKEY"
+    set :toadhopper, :api_key => "YOURAPIKEY"
     
     get "/" do
       raise "Kaboom!"
     end
     
     error do
-      report_error_to_hoptoad!
+      post_error_to_hoptoad!
       "Ouch, that hurt."
     end

@@ -1,38 +1,85 @@
-require File.dirname(__FILE__) + "/test_helper.rb"
+require 'rubygems'
+
+require 'test/unit'
+require 'sinatra/base'
+require 'rack/test'
+require 'toadhopper/test/methods'
+
+$:.unshift File.dirname(__FILE__) + "/../lib"
+require 'sinatra/toadhopper'
 
 class TestReportErrorToHoptoad < Test::Unit::TestCase
   
-  require 'sinatra/base'
-  
   class AppThatGoesBoom < Sinatra::Base
 
-    require 'sinatra/toadhopper'
+    helpers Sinatra::Toadhopper
 
-    Toadhopper.api_key = "abc123"
+    set :raise_errors, false
+    set :sessions, true
 
-    get "/" do
+    set :toadhopper, :api_key => "apikey"
+
+    get "/:id" do
+      session["id"] = "sessionid"
       raise "Kaboom!"
     end
 
     error do
-      report_error_to_hoptoad!
+      post_error_to_hoptoad!
       "Ouch, that hurt."
     end
   end
   
   include Rack::Test::Methods
-  include Toadhopper::Test
+  include Toadhopper::Test::Methods
 
   def app; AppThatGoesBoom end
 
   def setup
     stub_toadhopper_post!
+    get "/theid"
+    @error, @options, @header_options = last_toadhopper_post_arguments
   end
 
-  def test_reports_errors
-    get "/"
-    assert_equal "RuntimeError", last_toadhopper_post.error.class
-    assert_equal "Kaboom!", last_toadhopper_post.error.message
+  def test_api_key_set
+    assert_equal "apikey", Toadhopper.api_key
+  end
+
+  def test_reported_error
+    assert_equal RuntimeError, @error.class
+    assert_equal "Kaboom!", @error.message
+  end
+  
+  def test_options
+    assert_equal({"id" => "theid"}, @options[:parameters])
+    assert_equal last_request.url, @options[:url]
+    assert_equal last_request.env, @options[:cgi_data]
+    assert_equal ENV, @options[:environment_vars]
+    assert_equal({"id" => "sessionid"}, @options[:session_data])
+  end
+  
+end
+
+class TestFailsSilentWithoutApiKey < Test::Unit::TestCase
+  
+  class AppWithoutApiKey < Sinatra::Base
+    helpers Sinatra::Toadhopper
+    set :raise_errors, false
+    get("/") { raise "Kaboom!" }
+    error do
+      post_error_to_hoptoad!
+      "Error"
+    end
+  end
+  
+  include Rack::Test::Methods
+  include Toadhopper::Test::Methods
+
+  def app; AppWithoutApiKey end
+  
+  def test_doesnt_raise_an_error
+    stub_toadhopper_post!
+    assert_nothing_raised { get "/" }
   end
   
 end
