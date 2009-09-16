@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name              = "toadhopper-sinatra"
-  s.version           = "0.4"
+  s.version           = "0.5"
   s.extra_rdoc_files  = ["Readme.md"]
   s.summary           = "Post Hoptoad notifications from Sinatra"
   s.description       = s.summary
