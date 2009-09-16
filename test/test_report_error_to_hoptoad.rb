@@ -8,6 +8,16 @@ require 'toadhopper/test/methods'
 $:.unshift File.dirname(__FILE__) + "/../lib"
 require 'sinatra/toadhopper'
 
+# Stub the Toadhopper posting
+
+def Toadhopper.post!(*args)
+  instance_variable_set(:@last_post_arguments, args)
+end
+
+def Toadhopper.last_post_arguments
+  instance_variable_get(:@last_post_arguments)
+end
+
 class TestReportErrorToHoptoad < Test::Unit::TestCase
   
   class AppThatGoesBoom < Sinatra::Base
@@ -31,14 +41,12 @@ class TestReportErrorToHoptoad < Test::Unit::TestCase
   end
   
   include Rack::Test::Methods
-  include Toadhopper::Test::Methods
 
   def app; AppThatGoesBoom end
 
   def setup
-    stub_toadhopper_post!
     get "/theid"
-    @error, @options, @header_options = last_toadhopper_post_arguments
+    @error, @options, @header_options = Toadhopper.last_post_arguments
   end
 
   def test_api_key_set
@@ -76,12 +84,10 @@ class TestFailsSilentWithoutApiKey < Test::Unit::TestCase
   end
   
   include Rack::Test::Methods
-  include Toadhopper::Test::Methods
 
   def app; AppWithoutApiKey end
   
   def test_doesnt_raise_an_error
-    stub_toadhopper_post!
     assert_nothing_raised { get "/" }
   end
   
