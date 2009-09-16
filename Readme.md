@@ -2,7 +2,7 @@ Post [Hoptoad](http://www.hoptoadapp.com/) notifications from Sinatra
 
     require 'sinatra/toadhopper'
     
-    set :toadhopper, :api_key => "your hoptoad API key"
+    set :toadhopper, :api_key => "your hoptoad API key", :filters => /password/
     
     get "/" do
       raise "Kaboom!"
