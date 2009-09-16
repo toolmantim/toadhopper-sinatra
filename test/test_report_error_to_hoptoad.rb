@@ -62,33 +62,11 @@ class TestReportErrorToHoptoad < Test::Unit::TestCase
   end
   
   def test_options
-    assert_equal({"id" => "theid"}, @options[:parameters])
-    assert_equal last_request.url, @options[:url]
-    assert_equal last_request.env, @options[:cgi_data]
-    assert_equal ENV, @options[:environment_vars]
-    assert_equal({"id" => "sessionid"}, @options[:session_data])
-  end
-  
-end
-
-class TestFailsSilentWithoutApiKey < Test::Unit::TestCase
-  
-  class AppWithoutApiKey < Sinatra::Base
-    helpers Sinatra::Toadhopper
-    set :raise_errors, false
-    get("/") { raise "Kaboom!" }
-    error do
-      post_error_to_hoptoad!
-      "Error"
-    end
-  end
-  
-  include Rack::Test::Methods
-
-  def app; AppWithoutApiKey end
-  
-  def test_doesnt_raise_an_error
-    assert_nothing_raised { get "/" }
+    assert_equal ENV, @options[:environment]
+    assert_equal "http://example.org/theid", @options[:request][:url]
+    assert_equal({"id" => "theid"}, @options[:request][:params])
+    assert_equal nil, @options[:request][:rails_root]
+    assert_equal({:key => 42, :data => {"id" => "sessionid"}}, @options[:session])
   end
   
 end

@@ -6,9 +6,7 @@ module Sinatra
   module Toadhopper
     # Reports the current sinatra error to Hoptoad
     def post_error_to_hoptoad!
-      if options.respond_to?(:toadhopper)
-        options.toadhopper.each_pair {|k, v| ::Toadhopper.__send__("#{k}=", v)}
-      end
+      options.toadhopper.each_pair {|k, v| ::Toadhopper.__send__("#{k}=", v)}
       unless ::Toadhopper.api_key
         STDERR.puts "WARNING: Ignoring hoptoad notification - :api_key not set"
         return
@@ -16,14 +14,22 @@ module Sinatra
       ::Toadhopper.post!(
         env['sinatra.error'],
         {
-          :parameters       => params,
-          :url              => request.url,
-          :cgi_data         => request.env,
-          :environment_vars => ENV,
-          :session_data     => session.to_hash
+          :environment => ENV,
+          :request     => {
+            :params => params,
+            :rails_root => options.root,
+            :url => request.url
+          },
+          :session => {
+            :key => 42, # Doesn't apply to Rack sessions
+            :data => session
+          }
         }
       )
     end
+  end
+  def self.registered(app)
+    app.set :hoptoad, {}
   end
   helpers Toadhopper
 end

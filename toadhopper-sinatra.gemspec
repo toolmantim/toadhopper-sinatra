@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name              = "toadhopper-sinatra"
-  s.version           = "0.3"
+  s.version           = "0.4"
   s.extra_rdoc_files  = ["Readme.md"]
   s.summary           = "Post Hoptoad notifications from Sinatra"
   s.description       = s.summary
@@ -17,5 +17,5 @@ Gem::Specification.new do |s|
                           test/test_report_error_to_hoptoad.rb
                         )
   s.has_rdoc          = true
-  s.add_dependency("toadhopper", [">= 0.5"])
+  s.add_dependency("toadhopper", [">= 0.6"])
 end
