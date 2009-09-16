@@ -1,7 +1,5 @@
 Post [Hoptoad](http://www.hoptoadapp.com/) notifications from Sinatra
 
-## Example
-
     require 'sinatra/toadhopper'
     
     set :toadhopper, :api_key => "your hoptoad API key"
