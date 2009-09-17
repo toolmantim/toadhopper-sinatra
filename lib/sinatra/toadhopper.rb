@@ -6,7 +6,7 @@ module Sinatra
   module Toadhopper
     # Reports the current sinatra error to Hoptoad
     def post_error_to_hoptoad!
-      options.toadhopper.each_pair {|k, v| ::Toadhopper.__send__("#{k}=", v)}
+      options.toadhopper.each_pair {|k, v| ::Toadhopper.__send__("#{k}=", v)} if options.respond_to?(:toadhopper)
       unless ::Toadhopper.api_key
         STDERR.puts "WARNING: Ignoring hoptoad notification - :api_key not set"
         return
@@ -28,9 +28,6 @@ module Sinatra
         {'X-Hoptoad-Client-Name'    => 'toadhopper-sinatra'}
       )
     end
-  end
-  def self.registered(app)
-    app.set :hoptoad, {}
   end
   helpers Toadhopper
 end
