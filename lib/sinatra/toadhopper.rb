@@ -15,17 +15,17 @@ module Sinatra
         env['sinatra.error'],
         {
           :environment => ENV,
-          :request     => {
-            :params => params,
+          :request => {
+            :params     => params,
             :rails_root => options.root,
-            :url => request.url
+            :url        => request.url
           },
           :session => {
-            :key => 42, # Doesn't apply to Rack sessions
+            :key  => 42, # Doesn't apply to Rack sessions
             :data => session
           }
         },
-        {'X-Hoptoad-Client-Name'    => 'toadhopper-sinatra'}
+        {'X-Hoptoad-Client-Name' => 'toadhopper-sinatra'}
       )
     end
   end
