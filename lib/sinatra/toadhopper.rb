@@ -14,7 +14,7 @@ module Sinatra
       ::Toadhopper.post!(
         env['sinatra.error'],
         {
-          :environment => ENV,
+          :environment => ENV.to_hash,
           :request => {
             :params     => params,
             :rails_root => options.root,
