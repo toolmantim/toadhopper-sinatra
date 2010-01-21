@@ -16,21 +16,6 @@
                              \ \ /\/\  
                              /\/\
 
-How?
-
-    require 'sinatra/toadhopper'
-    
-    set :toadhopper, :api_key => "your hoptoad API key", :filters => /password/
-    
-    get "/" do
-      raise "Kaboom!"
-    end
-    
-    error do
-      post_error_to_hoptoad!
-      "Ouch, that hurt."
-    end
-
-Install it via rubygems:
+For usage see example.rb. To install:
 
     gem install toadhopper-sinatra

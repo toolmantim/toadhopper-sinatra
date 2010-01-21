@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name              = "toadhopper-sinatra"
-  s.version           = "0.9"
+  s.version           = "0.10"
   s.extra_rdoc_files  = ["README.md", "LICENSE"]
   s.summary           = "Post Hoptoad notifications from Sinatra"
   s.description       = s.summary
@@ -14,8 +14,9 @@ Gem::Specification.new do |s|
                           Rakefile
                           LICENSE
                           lib/sinatra/toadhopper.rb
-                          test/test_report_error_to_hoptoad.rb
+                          example.rb
+                          test_example.rb
                         )
   s.has_rdoc          = true
-  s.add_dependency("toadhopper", [">= 0.6"])
+  s.add_dependency("toadhopper", ["0.9.4"])
 end
