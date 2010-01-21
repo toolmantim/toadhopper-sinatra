@@ -4,7 +4,7 @@ require 'toadhopper'
 module Sinatra
   # The Toadhopper helper methods
   module ToadHopper
-    VERSION = "0.10"
+    VERSION = "0.10.1"
     # Reports the current sinatra error to Hoptoad
     def post_error_to_hoptoad!
       unless options.toadhopper && options.toadhopper[:api_key]
