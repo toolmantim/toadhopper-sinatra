@@ -9,6 +9,7 @@ module Sinatra
     def post_error_to_hoptoad!
       unless options.toadhopper && options.toadhopper[:api_key]
         STDERR.puts "ToadHopper api key not set, e.g. set :toadhopper, :api_key => 'my api key'"
+        return
       end
       toadhopper = ToadHopper(options.toadhopper[:api_key])
       toadhopper.filters = options.toadhopper[:filters] if options.toadhopper[:filters]
