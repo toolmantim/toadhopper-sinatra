@@ -24,8 +24,6 @@ class Sinatra::ToadHopper::TestExample < Test::Unit::TestCase
   def app; Sinatra::Application end
 
   def setup
-    app.set :environment, :production
-
     @toadhopper = ::ToadHopper.new("")
     stub(::ToadHopper).new do |api_key|
       @api_key = api_key
@@ -50,14 +48,13 @@ class Sinatra::ToadHopper::TestExample < Test::Unit::TestCase
   end
 
   def test_options
-    assert_equal ENV.to_hash, @options[:environment]
-    assert_equal "http://example.org/register", @options[:url]
-    assert @options[:request]
-    assert @options[:request].respond_to?(:params)
-    assert @options[:framework_env] = "production"
-    assert @options[:project_root] = app.root
-    assert @options[:session] = {:user_id => 42}
-    assert @options[:notifier_name] = "toadhopper-sinatra"
+    assert_equal ENV.to_hash,                          @options[:environment]
+    assert_equal "http://example.org/register",        @options[:url]
+    assert_equal({"name"=>"Billy", "password"=>"Bob"}, @options[:request].params)
+    assert_equal "production",                         @options[:framework_env]
+    assert_equal app.root,                             @options[:project_root]
+    assert_equal({:user_id => 42},                     @options[:session])
+    assert_equal "toadhopper-sinatra",                 @options[:notifier_name]
   end
   
   def test_header_options
