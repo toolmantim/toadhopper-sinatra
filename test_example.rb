@@ -47,7 +47,6 @@ eg "Posting" do
   Check(@options[:environment]).is(ENV.to_hash)
   Check(@options[:url]).is("http://example.org/register")
   Check(@options[:request].params).is({"name"=>"Billy", "password"=>"Bob"})
-  
   Check(@options[:framework_env]).is("production")
   Check(@options[:project_root]).is(app.root)
   Check(@options[:session]).is({:user_id => 42})
