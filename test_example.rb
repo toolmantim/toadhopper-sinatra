@@ -23,8 +23,8 @@ end
 eg.setup do
   RR.reset
   
-  @toadhopper = ::ToadHopper.new("")
-  stub(::ToadHopper).new do |api_key|
+  @toadhopper = ::Toadhopper.new("")
+  stub(::Toadhopper).new do |api_key|
     @api_key = api_key
     @toadhopper
   end

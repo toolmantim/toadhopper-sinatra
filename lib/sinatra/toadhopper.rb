@@ -3,15 +3,15 @@ require 'toadhopper'
 
 module Sinatra
   # The Toadhopper helper methods
-  module ToadHopper
+  module Toadhopper
     VERSION = "1.0.0"
     # Reports the current sinatra error to Hoptoad
     def post_error_to_hoptoad!
       unless options.toadhopper && options.toadhopper[:api_key]
-        STDERR.puts "ToadHopper api key not set, e.g. set :toadhopper, :api_key => 'my api key'"
+        STDERR.puts "Toadhopper api key not set, e.g. set :toadhopper, :api_key => 'my api key'"
         return
       end
-      toadhopper = ToadHopper(options.toadhopper[:api_key])
+      toadhopper = Toadhopper(options.toadhopper[:api_key])
       toadhopper.filters = options.toadhopper[:filters] if options.toadhopper[:filters]
       toadhopper.post!(
         env['sinatra.error'],
@@ -30,5 +30,5 @@ module Sinatra
       )
     end
   end
-  helpers ToadHopper
+  helpers Toadhopper
 end
