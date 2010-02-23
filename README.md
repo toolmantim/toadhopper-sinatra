@@ -19,3 +19,20 @@
 For usage see example.rb. To install:
 
     gem install toadhopper-sinatra
+
+## Development
+
+Install Bundler 0.9.x, then:
+
+    % git clone git://github.com/toolmantim/toadhopper-sinatra.git
+    % cd toadhopper-sinatra
+    % bundle install
+    % bundle exec rake test
+
+To generate the docs:
+
+    % bundle exec yardoc
+
+To build the gem:
+
+    % bundle exec rake build

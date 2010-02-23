@@ -1,23 +1,25 @@
-require 'rake/testtask'
+Bundler.setup(:default, :development, :test)
+Bundler.require(:development, :test)
 
-Rake::TestTask.new do |t|
-  t.libs << "test"
-  t.test_files = FileList['test/test*.rb']
-  t.verbose = true
+Jeweler::Tasks.new do |s|
+  s.name     = "toadhopper-sinatra"
+  s.summary  = "Post Hoptoad notifications from Sinatra"
+  s.email    = "t.lucas@toolmantim.com"
+  s.homepage = "http://github.com/toolmantim/toadhopper-sinatra"
+  s.authors  = ["Tim Lucas"]
+  s.extra_rdoc_files  = ["README.md", "LICENSE", "example.rb"]
+
+  require File.join(File.dirname(__FILE__), 'lib', 'sinatra', 'toadhopper')
+  s.version  = Sinatra::Toadhopper::VERSION
+
+  require 'bundler'
+  bundle = Bundler::Definition.from_gemfile("Gemfile")
+  bundle.dependencies.
+    select { |d| d.groups.include?(:default) || d.groups.include?(:runtime) }.
+    each   { |d| s.add_dependency(d.name, d.version_requirements.to_s)  }
 end
 
-begin
-  gem "sr-mg", "<= 0.0.5"
-  require "mg"
-  MG.new("toadhopper-sinatra.gemspec")
-rescue Gem::LoadError
-end
-
-begin
-  gem "yard"
-  require 'yard'
-  YARD::Rake::YardocTask.new do |t|
-    t.options = ['-r', 'README.md', '--files', 'example.rb', 'LICENSE', 'example.rb'] # optional
-  end
-rescue Gem::LoadError
+desc "Run tests"
+task :test do
+  exec "/usr/bin/env ruby #{File.dirname(__FILE__)}/test_example.rb"
 end

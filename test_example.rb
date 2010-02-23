@@ -1,16 +1,10 @@
-toadhopper_dir = "#{File.dirname(__FILE__)}/../toadhopper"
-raise "#{toadhopper_dir} does not exist" unless File.directory?(toadhopper_dir)
-$:.unshift "#{toadhopper_dir}/lib"
+Bundler.setup(:default, :test)
+Bundler.require(:test)
 
 $:.unshift "#{File.dirname(__FILE__)}/lib"
-
 require "#{File.dirname(__FILE__)}/example"
+
 Sinatra::Application.set :environment, :production
-
-require 'exemplor'
-
-require 'rack/test'
-require 'rr'
 
 eg.helpers do
   include Rack::Test::Methods

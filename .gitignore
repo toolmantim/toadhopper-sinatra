@@ -1,3 +1,4 @@
-/dist/
+/pkg/
 .yardoc
+toadhopper-sinatra.gemspec
 /doc/
