@@ -18,5 +18,5 @@ Gem::Specification.new do |s|
                           test_example.rb
                         )
   s.has_rdoc          = true
-  s.add_dependency("toadhopper", ["0.9.4"])
+  s.add_dependency("toadhopper", ["0.9.8"])
 end

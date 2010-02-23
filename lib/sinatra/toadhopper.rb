@@ -17,7 +17,7 @@ module Sinatra
         env['sinatra.error'],
         {
           :url => request.url,
-          :request => request,
+          :params => request.params,
           :session => session.to_hash,
           :environment => ENV.to_hash,
           :framework_env => options.environment.to_s,
