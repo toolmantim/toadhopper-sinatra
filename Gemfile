@@ -1,6 +1,6 @@
 source :gemcutter
 
-gem 'toadhopper', '1.0.0'
+gem 'toadhopper', '~> 1.0.0'
 gem 'sinatra'
 
 group :development do
