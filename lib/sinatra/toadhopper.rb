@@ -11,8 +11,9 @@ module Sinatra
         STDERR.puts "Toadhopper api key not set, e.g. set :toadhopper, :api_key => 'my api key'"
         return
       end
-      toadhopper = Toadhopper(options.toadhopper[:api_key])
-      toadhopper.filters = options.toadhopper[:filters] if options.toadhopper[:filters]
+      filters = options.toadhopper.delete(:filters)
+      toadhopper = ::Toadhopper.new(options.toadhopper.delete(:api_key), options.toadhopper)
+      toadhopper.filters = filters if filters
       toadhopper.post!(
         env['sinatra.error'],
         {
