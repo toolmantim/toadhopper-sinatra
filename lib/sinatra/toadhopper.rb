@@ -5,6 +5,11 @@ module Sinatra
   # The Toadhopper helper methods
   module Toadhopper
     VERSION = "1.0.2"
+
+    def self.registered(app)
+      app.helpers Toadhopper
+    end
+
     # Reports the current sinatra error to Hoptoad
     def post_error_to_hoptoad!
       unless options.toadhopper && options.toadhopper[:api_key]
@@ -31,5 +36,5 @@ module Sinatra
       )
     end
   end
-  helpers Toadhopper
+  register Toadhopper
 end
