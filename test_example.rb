@@ -1,5 +1,7 @@
-Bundler.setup(:default, :test)
-Bundler.require(:test)
+Bundler.setup
+require 'exemplor'
+require 'rr'
+require 'rack/test'
 
 $:.unshift "#{File.dirname(__FILE__)}/lib"
 require "#{File.dirname(__FILE__)}/example"
@@ -32,8 +34,7 @@ eg "Posting" do
   post "/register", :name => "Billy", :password => "Bob"
   
   Check(@api_key).is("apikey")
-
-  Check(@toadhopper.filters).is([/password/])
+  Check(@toadhopper.send(:filters)).is([/password/])
 
   Check(@error.class).is(RuntimeError)
   Check(@error.message).is("Kaboom!")

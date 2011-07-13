@@ -1,11 +1,10 @@
 require 'sinatra/base'
 require 'toadhopper'
+require 'sinatra/toadhopper/version'
 
 module Sinatra
   # The Toadhopper helper methods
   module Toadhopper
-    VERSION = "1.0.2"
-
     def self.registered(app)
       app.helpers Toadhopper
     end
