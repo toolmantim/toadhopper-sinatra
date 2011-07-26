@@ -1,4 +1,5 @@
 Bundler.setup
+
 require 'exemplor'
 require 'rr'
 require 'rack/test'
