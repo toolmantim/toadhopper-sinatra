@@ -1,6 +1,5 @@
 /pkg/
 .yardoc
-toadhopper-sinatra.gemspec
 /doc/
 Gemfile.lock
 .bundle
