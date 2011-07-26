@@ -20,7 +20,7 @@ Gem::Specification.new do |s|
   s.extra_rdoc_files  = ['README.md', 'LICENSE', 'example.rb']
 
   s.add_dependency 'sinatra'
-  s.add_dependency 'toadhopper'
+  s.add_dependency 'toadhopper', '~> 1.0'
   
   s.add_development_dependency 'rake'
   s.add_development_dependency 'exemplor'
