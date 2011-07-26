@@ -1,4 +1,4 @@
-[Hoptoad](http://www.hoptoadapp.com/) meets [Sinatra](http://www.sinatrarb.com/).
+[Airbrake](http://www.airbrakeapp.com/) meets [Sinatra](http://www.sinatrarb.com/).
 
         _____                                ,
        /     \______                         |\        __
@@ -22,7 +22,7 @@ For usage see example.rb. To install:
 
 ## Development
 
-Install Bundler 0.9.x, then:
+Install Bundler, then:
 
     % git clone git://github.com/toolmantim/toadhopper-sinatra.git
     % cd toadhopper-sinatra

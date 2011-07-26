@@ -7,13 +7,13 @@ module Sinatra
 
     module Helpers
       # Reports the current sinatra error to Hoptoad
-      def post_error_to_hoptoad!
-        unless toadhopper_api_key
-          STDERR.puts "Toadhopper api key not set, e.g. set :toadhopper, :api_key => 'my api key'"
+      def post_error_to_airbrake!
+        unless airbrake_api_key
+          STDERR.puts "Airbrake api key not set, e.g. set :airbrake, :api_key => 'my api key'"
           return
         end
-        toadhopper = ::Toadhopper.new(toadhopper_api_key, toadhopper_options)
-        toadhopper.filters = toadhopper_filters if toadhopper_filters
+        toadhopper = ::Toadhopper.new(airbrake_api_key, airbrake_options)
+        toadhopper.filters = airbrake_filters if airbrake_filters
         toadhopper.post!(
           env['sinatra.error'],
           {
@@ -31,20 +31,20 @@ module Sinatra
         )
       end
       private
-        def toadhopper_filters
-          settings.toadhopper[:filters]
+        def airbrake_filters
+          settings.airbrake[:filters]
         end
-        def toadhopper_api_key
-          settings.toadhopper[:api_key]
+        def airbrake_api_key
+          settings.airbrake[:api_key]
         end
-        def toadhopper_options
-          settings.toadhopper.reject {|k,_| [:api_key, :filters].include?(k)}
+        def airbrake_options
+          settings.airbrake.reject {|k,_| [:api_key, :filters].include?(k)}
         end
     end
     
     def self.registered(app)
       app.helpers Toadhopper::Helpers
-      app.set :toadhopper, {}
+      app.set :airbrake, {}
     end
     
   end

@@ -1,7 +1,7 @@
 require 'sinatra'
 require 'sinatra/toadhopper'
 
-set :toadhopper, :api_key => "apikey", :filters => /password/
+set :airbrake, :api_key => "apikey", :filters => /password/
 
 post "/register" do
   session[:user_id] = 42
@@ -9,6 +9,6 @@ post "/register" do
 end
 
 error do
-  post_error_to_hoptoad!
+  post_error_to_airbrake!
   "Ouch, that hurt."
 end
