@@ -21,8 +21,8 @@ module Sinatra
             :params => request.params,
             :session => session.to_hash,
             :environment => ENV.to_hash,
-            :framework_env => options.environment.to_s,
-            :project_root => options.root,
+            :framework_env => settings.environment.to_s,
+            :project_root => settings.root,
             :notifier_name => (notifier_name = "toadhopper-sinatra"),
             :notifier_version => VERSION,
             :notifier_url => 'http://github.com/toolmantim/toadhopper-sinatra'
